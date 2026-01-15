@@ -1,9 +1,9 @@
 import unittest
-from htmlnode import HTMLNode
+from htmlnode import HTMLNode, LeafNode
 
 
 
-class TestTextNode(unittest.TestCase):
+class TestHTMLNode(unittest.TestCase):
     def test_params(self) -> None:
         node = HTMLNode("p", "This is a Paragraph", [], {"Color": "Red"})
         self.assertEqual(node.tag, "p")
@@ -30,6 +30,27 @@ class TestTextNode(unittest.TestCase):
         node3 = HTMLNode("p", "This is a Paragraph", [node, node2], {"Color": "Yellow", "Size": "16", "href": "https://google.com"})
         self.assertEqual(node3.props, {"Color": "Yellow", "Size": "16", "href": "https://google.com"})
         self.assertEqual(node3.props_to_html(), ' Color="Yellow" Size="16" href="https://google.com"')
+
+class TestLeafNode(unittest.TestCase):
+    def test_params(self) -> None:
+        node = LeafNode("p", "This is a Paragraph", {"Color": "Red"})
+        self.assertEqual(node.tag, "p")
+        self.assertEqual(node.value, "This is a Paragraph")
+        self.assertEqual(node.props, {"Color": "Red"})
+
+    def test_no_tag_to_html(self) -> None:
+        node = LeafNode(None, "Hello")
+        self.assertEqual(node.to_html(), "Hello")
+
+    def test_to_html(self) -> None:
+        node = LeafNode("p", "This is a Paragraph")
+        self.assertEqual(node.to_html(), '<p>This is a Paragraph</p>')
+
+    def test_to_html_with_props(self) -> None:
+        node = LeafNode("p", "This is a Paragraph", {"Color": "Yellow", "Size": "16", "href": "https://google.com"})
+        self.assertEqual(node.to_html(), '<p Color="Yellow" Size="16" href="https://google.com">This is a Paragraph</p>')
+
+
 
 
 if __name__ == "__main__":
