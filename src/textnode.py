@@ -1,23 +1,26 @@
 from enum import Enum
+from typing import Union, Any, TypeVar, Optional
 
 class TextType(Enum):
-    PLAIN = "plain"
-    BOLD_TEXT = "bold"
-    ITALIC_TEXT = "italic"
-    CODE_TEXT = "code"
+    TEXT = "text"
+    BOLD = "bold"
+    ITALIC = "italic"
+    CODE = "code"
     LINK = "link"
     IMAGE = "image"
 
 class TextNode():
-    def __init__(self, text, text_type, url=None):
+    def __init__(self, text: str, text_type: TextType, url: str | None = None):
         self.text = text
-        self.text_type: TextType = text_type
+        self.text_type = text_type
         self.url = url
     
-    def __eg__(self, other):
-        return (self.text == other.text and 
-                self.text_type == other.text_type and 
-                self.url == other.url)
+    def __eq__(self, other) -> bool:
+        return (
+                self.text_type.value == other.text_type.value
+            and self.text == other.text
+            and self.url == other.url
+        )
     
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"TextNode({self.text}, {self.text_type.value}, {self.url})"
