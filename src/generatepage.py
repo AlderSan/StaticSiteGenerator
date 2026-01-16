@@ -50,8 +50,10 @@ def generate_pages_recursive(dir_path_content: str, template_path: str, dest_dir
                 dir_list.append(content)
         for file in file_list:
             dest_file = os.path.join(dest_dir_path, file)
+            dest_index = dest_file.rfind(".")
+            corrected_dest_file = dest_file[:dest_index] + ".html"
             file_path = os.path.join(dir_path_content, file)
-            generate_page(file_path, abs_template, dest_file)
+            generate_page(file_path, abs_template, corrected_dest_file)
         for dir in dir_list:
             new_src = os.path.join(abs_from, dir)
             new_dest = os.path.join(abs_dest, dir)
