@@ -27,7 +27,7 @@ def block_to_block_type(markdown_block: str) -> BlockType:
     if markdown_block.startswith("```\n") and markdown_block.endswith("```"):
         block_type = BlockType.CODE
     block_lines = markdown_block.split("\n")
-    if len(block_lines) == len(list(filter(lambda l: l.startswith("> "), block_lines))):
+    if len(block_lines) == len(list(filter(lambda l: l.strip("\n").startswith(">"), block_lines))):
         block_type = BlockType.QUOTE
     if len(block_lines) == len(list(filter(lambda l: l.startswith("- "), block_lines))):
         block_type = BlockType.UNORDERED_LIST
