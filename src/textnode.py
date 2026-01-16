@@ -1,5 +1,4 @@
 from enum import Enum
-from typing import Union, Any, TypeVar, Optional
 from htmlnode import LeafNode
 
 class TextType(Enum):

@@ -1,4 +1,4 @@
-from htmlnode import HTMLNode, ParentNode, LeafNode
+from htmlnode import HTMLNode, ParentNode
 from markdowntoblocks import markdown_to_blocks, block_to_block_type, BlockType
 from splitnodes import text_to_textnodes
 from textnode import TextNode, text_node_to_html_node, TextType
