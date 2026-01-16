@@ -53,7 +53,7 @@ class LeafNode(HTMLNode):
         return str(results)    
     
 class ParentNode(HTMLNode):
-    def __init__(self, tag: str | None, children: list[HTMLNode] | None, props: dict[str, str] | None = None) -> None:
+    def __init__(self, tag: str | None, children: list[HTMLNode | LeafNode] | None, props: dict[str, str] | None = None) -> None:
         super().__init__(tag, None, children, props)
 
     def to_html(self) -> str:
